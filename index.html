@@ -10,7 +10,7 @@
 <body>
 
 <!-- ============================================================
-     TOP BAR — utility strip
+     TOP BAR
      ============================================================ -->
 <div class="topbar">
     <div class="topbar-inner">
@@ -22,9 +22,9 @@
         <span class="topbar-sep">|</span>
         <span class="topbar-item">Документация</span>
         <span class="topbar-right">
-            <a href="#" class="topbar-link">Войти</a>
+            <a href="https://github.com/cosdr/NOS-down" class="topbar-link" target="_blank">Репозиторий</a>
             <span class="topbar-sep">|</span>
-            <a href="#" class="topbar-link">Скачать</a>
+            <a href="https://github.com/cosdr/NOS-down" class="topbar-link" target="_blank">Скачать</a>
         </span>
     </div>
 </div>
@@ -60,7 +60,7 @@
     <div class="hero-inner">
         <div class="hero-left">
             <div class="hero-eyebrow">NeutrinoOS 0.5.0 — выпуск доступен</div>
-            <h1 class="hero-title">Операционная система,<br>написанная с нуля</h1>
+            <h1 class="hero-title">Операционная система, написанная с нуля</h1>
             <p class="hero-lead">
                 32-битное ядро, собственные драйверы, файловая система FAT12
                 поверх ATA PIO и оболочка с историей команд. Никаких сторонних
@@ -68,7 +68,7 @@
                 желание разобраться, как это работает.
             </p>
             <div class="hero-actions">
-                <a href="#download" class="btn btn-primary">Скачать NeutrinoOS 0.5.0</a>
+                <a href="https://github.com/cosdr/NOS-down" class="btn btn-primary" target="_blank">Скачать NeutrinoOS 0.5.0</a>
                 <a href="#overview" class="btn btn-outline">Узнать больше</a>
             </div>
             <p class="hero-note">
@@ -485,47 +485,69 @@
             <div class="section-eyebrow">Загрузка</div>
             <h2 class="section-title">Получить NeutrinoOS 0.5.0</h2>
             <p class="section-desc">
-                Доступны два способа: скачать готовый образ или собрать
-                систему из исходного кода самостоятельно.
+                Загрузочный образ и диск с файловой системой доступны
+                для скачивания напрямую. Никаких сборок и установок —
+                скачал, запустил, работает.
             </p>
         </div>
 
         <div class="download-grid">
             <div class="download-card">
                 <div class="download-card-head">
-                    <h3>Готовый образ</h3>
-                    <span class="download-tag">Рекомендуется</span>
+                    <h3>Загрузочный образ</h3>
+                    <span class="download-tag">Основной файл</span>
                 </div>
                 <p>
-                    Загрузочный ISO-образ и диск FAT12 объёмом 8 МБ.
-                    Запускается в QEMU без предварительной сборки.
+                    ISO-образ для запуска системы в эмуляторе или записи
+                    на компакт-диск. Содержит ядро, загрузчик GRUB и все
+                    встроенные приложения.
                 </p>
                 <ul class="download-list">
                     <li>neutrino.iso — загрузочный образ</li>
-                    <li>disk.img — диск FAT12, 8 МБ</li>
-                    <li>Контрольные суммы SHA-256</li>
+                    <li>Размер: около 5–15 МБ</li>
+                    <li>Запуск в QEMU или запись на CD</li>
                 </ul>
-                <a href="https://github.com/ВАШ_НИК/neutrino-os/releases" class="btn btn-primary btn-block">Перейти к загрузке</a>
+                <a href="https://github.com/cosdr/NOS-down" class="btn btn-primary btn-block" target="_blank">Скачать образ</a>
             </div>
 
             <div class="download-card">
                 <div class="download-card-head">
-                    <h3>Сборка из исходников</h3>
-                    <span class="download-tag download-tag-alt">Для разработчиков</span>
+                    <h3>Диск с данными</h3>
+                    <span class="download-tag download-tag-alt">Дополнительно</span>
                 </div>
                 <p>
-                    Требуется Linux-окружение с набором инструментов для
-                    кросс-компиляции и создания загрузочных образов.
+                    Образ диска с файловой системой FAT12. Подключается
+                    к системе как второй диск и служит для сохранения
+                    файлов между перезагрузками.
                 </p>
-                <pre class="code-block"><code>git clone https://github.com/ВАШ_НИК/neutrino-os.git
-cd neutrino-os
-chmod +x build.sh run.sh
-./build.sh
-./run.sh</code></pre>
+                <ul class="download-list">
+                    <li>disk.img — образ FAT12, 8 МБ</li>
+                    <li>Содержит README.TXT, THEME.CFG, AUTOEXEC.NE</li>
+                    <li>Подключается в QEMU как IDE-диск</li>
+                </ul>
+                <a href="https://github.com/cosdr/NOS-down" class="btn btn-outline btn-block" target="_blank">Скачать образ диска</a>
             </div>
         </div>
 
         <div class="requirements">
+            <h3>Как запустить</h3>
+            <p class="launch-note">
+                После скачивания обоих файлов запустите эмулятор QEMU
+                следующей командой:
+            </p>
+            <pre class="code-block"><code>qemu-system-i386 \
+    -cdrom neutrino.iso \
+    -drive file=disk.img,format=raw,if=ide,index=0,media=disk \
+    -m 32M \
+    -boot d</code></pre>
+            <p class="launch-note">
+                Если диск с данными не нужен, уберите из команды строку
+                с параметром <code>-drive</code>. Система запустится
+                в режиме виртуального диска.
+            </p>
+        </div>
+
+        <div class="requirements requirements-spaced">
             <h3>Системные требования</h3>
             <table class="req-table">
                 <thead>
@@ -555,11 +577,6 @@ chmod +x build.sh run.sh
                         <td>Прошивка</td>
                         <td>BIOS (legacy)</td>
                         <td>UEFI не поддерживается</td>
-                    </tr>
-                    <tr>
-                        <td>Среда сборки</td>
-                        <td>Linux x86-64</td>
-                        <td>GCC, NASM, xorriso, mtools, dosfstools</td>
                     </tr>
                     <tr>
                         <td>Эмулятор</td>
@@ -718,11 +735,11 @@ chmod +x build.sh run.sh
             </details>
 
             <details class="faq-item">
-                <summary>Как сообщить об ошибке?</summary>
+                <summary>Где скачать систему?</summary>
                 <p>
-                    Через раздел Issues в репозитории проекта. Приложите
-                    описание проблемы, шаги воспроизведения и, если
-                    возможно, снимок экрана.
+                    Все файлы доступны в репозитории проекта по адресу
+                    <a href="https://github.com/cosdr/NOS-down" target="_blank">github.com/cosdr/NOS-down</a>.
+                    Там же можно сообщить об ошибке через раздел Issues.
                 </p>
             </details>
 
@@ -757,7 +774,7 @@ chmod +x build.sh run.sh
             Скачайте образ, запустите в QEMU и посмотрите, как выглядит
             операционная система, написанная с нуля.
         </p>
-        <a href="#download" class="btn btn-primary">Скачать NeutrinoOS 0.5.0</a>
+        <a href="https://github.com/cosdr/NOS-down" class="btn btn-primary" target="_blank">Скачать NeutrinoOS 0.5.0</a>
     </div>
 </section>
 
@@ -767,58 +784,4 @@ chmod +x build.sh run.sh
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-cols">
-            <div class="footer-col">
-                <h4>Продукт</h4>
-                <ul>
-                    <li><a href="#overview">Обзор</a></li>
-                    <li><a href="#features">Компоненты</a></li>
-                    <li><a href="#download">Загрузка</a></li>
-                    <li><a href="#roadmap">План развития</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Ресурсы</h4>
-                <ul>
-                    <li><a href="#screenshots">Галерея</a></li>
-                    <li><a href="#faq">Вопросы</a></li>
-                    <li><a href="https://github.com/ВАШ_НИК/neutrino-os" target="_blank">Исходный код</a></li>
-                    <li><a href="https://github.com/ВАШ_НИК/neutrino-os/issues" target="_blank">Сообщить об ошибке</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>О компании</h4>
-                <ul>
-                    <li><a href="#">Mikelsoft Corporation</a></li>
-                    <li><a href="#">Лицензия MIT</a></li>
-                    <li><a href="#">Правовая информация</a></li>
-                    <li><a href="#">Конфиденциальность</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Связь</h4>
-                <ul>
-                    <li><a href="https://github.com/ВАШ_НИК" target="_blank">GitHub</a></li>
-                    <li><a href="#">Электронная почта</a></li>
-                    <li><a href="#">Обсуждения</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="footer-brand">
-                <span class="brand-mark brand-mark-sm">M</span>
-                <span>Mikelsoft Corporation INC.</span>
-            </div>
-            <div class="footer-legal">
-                <span>© 2026 Mikelsoft Corporation INC. Все права защищены.</span>
-                <span class="footer-note">
-                    NeutrinoOS не является продуктом Microsoft Corporation.
-                    Упомянутые товарные знаки принадлежат их владельцам.
-                </span>
-            </div>
-        </div>
-    </div>
-</footer>
-
-</body>
-</html>
+            <div class="footer
