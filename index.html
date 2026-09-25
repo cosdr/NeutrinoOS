@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeutrinoOS 0.5.0 — операционная система | Mikelsoft Corporation</title>
+<meta name="description" content="NeutrinoOS — 32-битная операционная система для x86, разработанная с нуля. Своё ядро, драйверы, файловая система FAT12. Продукт Mikelsoft Corporation.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     TOP BAR — utility strip
+     ============================================================ -->
+<div class="topbar">
+    <div class="topbar-inner">
+        <span class="topbar-item">Mikelsoft Corporation</span>
+        <span class="topbar-sep">|</span>
+        <span class="topbar-item">Продукты</span>
+        <span class="topbar-sep">|</span>
+        <span class="topbar-item">Поддержка</span>
+        <span class="topbar-sep">|</span>
+        <span class="topbar-item">Документация</span>
+        <span class="topbar-right">
+            <a href="#" class="topbar-link">Войти</a>
+            <span class="topbar-sep">|</span>
+            <a href="#" class="topbar-link">Скачать</a>
+        </span>
+    </div>
+</div>
+
+<!-- ============================================================
+     MAIN NAVIGATION
+     ============================================================ -->
+<nav class="mainnav">
+    <div class="mainnav-inner">
+        <a href="#" class="brand">
+            <span class="brand-mark">M</span>
+            <span class="brand-text">
+                <span class="brand-name">Mikelsoft</span>
+                <span class="brand-sub">Corporation INC.</span>
+            </span>
+        </a>
+        <ul class="mainnav-links">
+            <li><a href="#overview">Обзор</a></li>
+            <li><a href="#features">Компоненты</a></li>
+            <li><a href="#screenshots">Галерея</a></li>
+            <li><a href="#download">Загрузка</a></li>
+            <li><a href="#roadmap">План развития</a></li>
+            <li><a href="#faq">Вопросы</a></li>
+        </ul>
+        <a href="#download" class="mainnav-cta">Получить NeutrinoOS</a>
+    </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero">
+    <div class="hero-inner">
+        <div class="hero-left">
+            <div class="hero-eyebrow">NeutrinoOS 0.5.0 — выпуск доступен</div>
+            <h1 class="hero-title">Операционная система,<br>написанная с нуля</h1>
+            <p class="hero-lead">
+                32-битное ядро, собственные драйверы, файловая система FAT12
+                поверх ATA PIO и оболочка с историей команд. Никаких сторонних
+                фреймворков, никаких заимствований. Только C, ассемблер и
+                желание разобраться, как это работает.
+            </p>
+            <div class="hero-actions">
+                <a href="#download" class="btn btn-primary">Скачать NeutrinoOS 0.5.0</a>
+                <a href="#overview" class="btn btn-outline">Узнать больше</a>
+            </div>
+            <p class="hero-note">
+                Сборка протестирована в QEMU. Работа на физическом оборудовании
+                возможна, но требует машины с BIOS (не UEFI).
+            </p>
+        </div>
+        <div class="hero-right">
+            <div class="hero-card">
+                <div class="hero-card-head">Сводка по продукту</div>
+                <table class="spec-table">
+                    <tr><td>Версия</td><td>0.5.0</td></tr>
+                    <tr><td>Архитектура</td><td>x86 (i386+)</td></tr>
+                    <tr><td>Режим</td><td>Protected, 32-bit</td></tr>
+                    <tr><td>Загрузчик</td><td>GRUB (multiboot)</td></tr>
+                    <tr><td>Языки</td><td>C, NASM</td></tr>
+                    <tr><td>Объём кода</td><td>~7 500 строк</td></tr>
+                    <tr><td>Файлов проекта</td><td>36</td></tr>
+                    <tr><td>Лицензия</td><td>MIT</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ============================================================
+     METRICS STRIP
+     ============================================================ -->
+<section class="metrics">
+    <div class="metrics-inner">
+        <div class="metric">
+            <div class="metric-value">36</div>
+            <div class="metric-label">файлов в проекте</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">6</div>
+            <div class="metric-label">драйверов устройств</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">35+</div>
+            <div class="metric-label">команд оболочки</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">5</div>
+            <div class="metric-label">встроенных игр</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">8</div>
+            <div class="metric-label">прикладных программ</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">4</div>
+            <div class="metric-label">скринсейвера</div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     OVERVIEW
+     ============================================================ -->
+<section id="overview" class="section">
+    <div class="section-inner">
+        <div class="section-head">
+            <div class="section-eyebrow">Обзор</div>
+            <h2 class="section-title">Что такое NeutrinoOS</h2>
+            <p class="section-desc">
+                NeutrinoOS — учебно-практическая операционная система,
+                разрабатываемая как самостоятельный продукт. Она не основана
+                на Linux, Windows, DOS или любой другой существующей системе.
+                Всё, от загрузчика до файловой системы, написано в рамках
+                проекта.
+            </p>
+        </div>
+
+        <div class="overview-grid">
+            <div class="overview-col">
+                <h3>Назначение</h3>
+                <p>
+                    Продукт создаётся как демонстрация того, что можно
+                    построить на голом железе без использования готовых
+                    операционных решений. Основная аудитория — разработчики,
+                    интересующиеся низкоуровневым программированием, и
+                    пользователи, которым нужна лёгкая система для старых
+                    машин.
+                </p>
+            </div>
+            <div class="overview-col">
+                <h3>Архитектура</h3>
+                <p>
+                    32-битный защищённый режим процессора. Загрузка
+                    выполняется через GRUB с использованием спецификации
+                    multiboot. Ядро компилируется GCC в режиме
+                    <code>-m32 -ffreestanding</code>, без стандартной
+                    библиотеки C — все базовые функции реализованы внутри
+                    проекта.
+                </p>
+            </div>
+            <div class="overview-col">
+                <h3>Подход</h3>
+                <p>
+                    Приоритет отдан прозрачности и понятности кода. Каждый
+                    драйвер общается с оборудованием напрямую через порты
+                    ввода-вывода. Никаких абстракций сверх необходимого.
+                    Прерывания намеренно не используются — весь ввод
+                    построен на опросе, что упрощает отладку.
+                </p>
+            </div>
+            <div class="overview-col">
+                <h3>Ограничения</h3>
+                <p>
+                    Система однозадачная, без поддержки USB, мыши и сети.
+                    Работает только в текстовом режиме VGA 80×25. FAT12
+                    не поддерживает подкаталоги и длинные имена файлов.
+                    Установка на физический диск пока не реализована.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FEATURES
+     ============================================================ -->
+<section id="features" class="section section-alt">
+    <div class="section-inner">
+        <div class="section-head">
+            <div class="section-eyebrow">Компоненты</div>
+            <h2 class="section-title">Что входит в состав</h2>
+            <p class="section-desc">
+                Полный перечень подсистем, драйверов и приложений,
+                поставляемых в составе NeutrinoOS 0.5.0.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">01</span>
+                    <h3>Ядро</h3>
+                </div>
+                <p>
+                    Точка входа в защищённом режиме. Инициализирует VGA,
+                    клавиатуру, ramdisk, диск, читает конфигурацию и
+                    передаёт управление оболочке. Работает без прерываний.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">02</span>
+                    <h3>Драйвер VGA</h3>
+                </div>
+                <p>
+                    Текстовый режим 80×25, 16 цветов. Прямая запись в
+                    видеопамять по адресу 0xB8000. Поддержка рамок,
+                    блочных символов, смены палитры и курсора.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">03</span>
+                    <h3>Драйвер клавиатуры</h3>
+                </div>
+                <p>
+                    Опрос порта 0x60. Преобразование скан-кодов в ASCII,
+                    поддержка Shift, Caps Lock, Ctrl, функциональных
+                    клавиш и стрелок. Кольцевой буфер на 256 событий.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">04</span>
+                    <h3>Часы реального времени</h3>
+                </div>
+                <p>
+                    Чтение CMOS RTC через порты 0x70 и 0x71. Поддержка
+                    BCD и бинарного формата, 12- и 24-часового режима.
+                    Смещение часового пояса применяется при выводе.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">05</span>
+                    <h3>Драйвер ATA PIO</h3>
+                </div>
+                <p>
+                    Работа с жёстким диском через порты 0x1F0–0x1F7.
+                    LBA28-адресация, чтение и запись секторов по 512
+                    байт. Используется файловой системой FAT12.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">06</span>
+                    <h3>Файловая система FAT12</h3>
+                </div>
+                <p>
+                    Полноценная реализация поверх ATA PIO. Чтение и
+                    запись файлов, создание каталогов, удаление,
+                    работа с таблицей размещения файлов. Файлы
+                    сохраняются между перезагрузками.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">07</span>
+                    <h3>Виртуальный диск</h3>
+                </div>
+                <p>
+                    Файловая система в оперативной памяти. Используется
+                    как резервный вариант, если физический диск
+                    недоступен. Содержимое не сохраняется при
+                    выключении.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">08</span>
+                    <h3>Оболочка</h3>
+                </div>
+                <p>
+                    Интерпретатор команд с регистронезависимым разбором,
+                    историей на 10 записей, автодополнением по Tab и
+                    удалением слова по Ctrl+Backspace. Более 35 команд.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">09</span>
+                    <h3>Система конфигурации</h3>
+                </div>
+                <p>
+                    Настройки хранятся на диске в отдельных файлах:
+                    тема оформления, часовой пояс, имя пользователя,
+                    пароль, флаг первой загрузки. Читаются при старте.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">10</span>
+                    <h3>Сценарий автозагрузки</h3>
+                </div>
+                <p>
+                    Файл AUTOEXEC.NE выполняется при каждом запуске.
+                    Поддерживает комментарии и подстановку переменных
+                    $username и $timezone. Команды передаются в оболочку.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">11</span>
+                    <h3>Графический файловый менеджер</h3>
+                </div>
+                <p>
+                    Двухпанельный интерфейс в стиле Volkov Commander.
+                    Верхнее меню, список файлов, строка функциональных
+                    клавиш. Встроенный просмотр и редактирование.
+                </p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-head">
+                    <span class="feature-num">12</span>
+                    <h3>Набор приложений</h3>
+                </div>
+                <p>
+                    Калькулятор, календарь, часы с крупными цифрами,
+                    редактор текста, ASCII-рисовалка, рендер множества
+                    Мандельброта, пять игр и четыре скринсейвера.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     SCREENSHOTS
+     ============================================================ -->
+<section id="screenshots" class="section">
+    <div class="section-inner">
+        <div class="section-head">
+            <div class="section-eyebrow">Галерея</div>
+            <h2 class="section-title">Снимки экрана</h2>
+            <p class="section-desc">
+                Изображения получены в среде QEMU. Для добавления
+                собственных снимков замените файлы в каталоге
+                <code>screenshots/</code>, сохранив имена.
+            </p>
+        </div>
+
+        <div class="gallery">
+            <figure class="gallery-item">
+                <img src="screenshots/boot.png" alt="Экран загрузки NeutrinoOS" loading="lazy"
+                     onerror="this.parentNode.classList.add('is-empty'); this.remove();">
+                <div class="gallery-placeholder">
+                    <span class="gallery-ph-name">boot.png</span>
+                    <span class="gallery-ph-hint">Загрузка ядра</span>
+                </div>
+                <figcaption>
+                    <span class="gallery-cap-title">Экран загрузки</span>
+                    <span class="gallery-cap-desc">Инициализация подсистем</span>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="screenshots/shell.png" alt="Оболочка NeutrinoOS" loading="lazy"
+                     onerror="this.parentNode.classList.add('is-empty'); this.remove();">
+                <div class="gallery-placeholder">
+                    <span class="gallery-ph-name">shell.png</span>
+                    <span class="gallery-ph-hint">Командная оболочка</span>
+                </div>
+                <figcaption>
+                    <span class="gallery-cap-title">Оболочка</span>
+                    <span class="gallery-cap-desc">Разбор команд и история</span>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="screenshots/gui.png" alt="Файловый менеджер" loading="lazy"
+                     onerror="this.parentNode.classList.add('is-empty'); this.remove();">
+                <div class="gallery-placeholder">
+                    <span class="gallery-ph-name">gui.png</span>
+                    <span class="gallery-ph-hint">Файловый менеджер</span>
+                </div>
+                <figcaption>
+                    <span class="gallery-cap-title">Файловый менеджер</span>
+                    <span class="gallery-cap-desc">Двухпанельный интерфейс</span>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="screenshots/fetch.png" alt="Вывод команды FETCH" loading="lazy"
+                     onerror="this.parentNode.classList.add('is-empty'); this.remove();">
+                <div class="gallery-placeholder">
+                    <span class="gallery-ph-name">fetch.png</span>
+                    <span class="gallery-ph-hint">Сведения о системе</span>
+                </div>
+                <figcaption>
+                    <span class="gallery-cap-title">Сведения о системе</span>
+                    <span class="gallery-cap-desc">Команда FETCH</span>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="screenshots/snake.png" alt="Игра SNAKE" loading="lazy"
+                     onerror="this.parentNode.classList.add('is-empty'); this.remove();">
+                <div class="gallery-placeholder">
+                    <span class="gallery-ph-name">snake.png</span>
+                    <span class="gallery-ph-hint">Игра SNAKE</span>
+                </div>
+                <figcaption>
+                    <span class="gallery-cap-title">Игра SNAKE</span>
+                    <span class="gallery-cap-desc">Классика в текстовом режиме</span>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="screenshots/tetris.png" alt="Игра TETRIS" loading="lazy"
+                     onerror="this.parentNode.classList.add('is-empty'); this.remove();">
+                <div class="gallery-placeholder">
+                    <span class="gallery-ph-name">tetris.png</span>
+                    <span class="gallery-ph-hint">Игра TETRIS</span>
+                </div>
+                <figcaption>
+                    <span class="gallery-cap-title">Игра TETRIS</span>
+                    <span class="gallery-cap-desc">Семь фигур, подсчёт очков</span>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="screenshots/editor.png" alt="Текстовый редактор" loading="lazy"
+                     onerror="this.parentNode.classList.add('is-empty'); this.remove();">
+                <div class="gallery-placeholder">
+                    <span class="gallery-ph-name">editor.png</span>
+                    <span class="gallery-ph-hint">Текстовый редактор</span>
+                </div>
+                <figcaption>
+                    <span class="gallery-cap-title">Текстовый редактор</span>
+                    <span class="gallery-cap-desc">Полноэкранный режим</span>
+                </figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="screenshots/matrix.png" alt="Скринсейвер Matrix" loading="lazy"
+                     onerror="this.parentNode.classList.add('is-empty'); this.remove();">
+                <div class="gallery-placeholder">
+                    <span class="gallery-ph-name">matrix.png</span>
+                    <span class="gallery-ph-hint">Скринсейвер</span>
+                </div>
+                <figcaption>
+                    <span class="gallery-cap-title">Скринсейвер Matrix</span>
+                    <span class="gallery-cap-desc">Один из четырёх режимов</span>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     DOWNLOAD
+     ============================================================ -->
+<section id="download" class="section section-alt">
+    <div class="section-inner">
+        <div class="section-head">
+            <div class="section-eyebrow">Загрузка</div>
+            <h2 class="section-title">Получить NeutrinoOS 0.5.0</h2>
+            <p class="section-desc">
+                Доступны два способа: скачать готовый образ или собрать
+                систему из исходного кода самостоятельно.
+            </p>
+        </div>
+
+        <div class="download-grid">
+            <div class="download-card">
+                <div class="download-card-head">
+                    <h3>Готовый образ</h3>
+                    <span class="download-tag">Рекомендуется</span>
+                </div>
+                <p>
+                    Загрузочный ISO-образ и диск FAT12 объёмом 8 МБ.
+                    Запускается в QEMU без предварительной сборки.
+                </p>
+                <ul class="download-list">
+                    <li>neutrino.iso — загрузочный образ</li>
+                    <li>disk.img — диск FAT12, 8 МБ</li>
+                    <li>Контрольные суммы SHA-256</li>
+                </ul>
+                <a href="https://github.com/ВАШ_НИК/neutrino-os/releases" class="btn btn-primary btn-block">Перейти к загрузке</a>
+            </div>
+
+            <div class="download-card">
+                <div class="download-card-head">
+                    <h3>Сборка из исходников</h3>
+                    <span class="download-tag download-tag-alt">Для разработчиков</span>
+                </div>
+                <p>
+                    Требуется Linux-окружение с набором инструментов для
+                    кросс-компиляции и создания загрузочных образов.
+                </p>
+                <pre class="code-block"><code>git clone https://github.com/ВАШ_НИК/neutrino-os.git
+cd neutrino-os
+chmod +x build.sh run.sh
+./build.sh
+./run.sh</code></pre>
+            </div>
+        </div>
+
+        <div class="requirements">
+            <h3>Системные требования</h3>
+            <table class="req-table">
+                <thead>
+                    <tr>
+                        <th>Компонент</th>
+                        <th>Минимум</th>
+                        <th>Примечание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Процессор</td>
+                        <td>i386 и выше</td>
+                        <td>Требуется поддержка protected mode</td>
+                    </tr>
+                    <tr>
+                        <td>Оперативная память</td>
+                        <td>32 МБ</td>
+                        <td>Рекомендуется 64 МБ</td>
+                    </tr>
+                    <tr>
+                        <td>Диск</td>
+                        <td>8 МБ</td>
+                        <td>Образ FAT12 для сохранения файлов</td>
+                    </tr>
+                    <tr>
+                        <td>Прошивка</td>
+                        <td>BIOS (legacy)</td>
+                        <td>UEFI не поддерживается</td>
+                    </tr>
+                    <tr>
+                        <td>Среда сборки</td>
+                        <td>Linux x86-64</td>
+                        <td>GCC, NASM, xorriso, mtools, dosfstools</td>
+                    </tr>
+                    <tr>
+                        <td>Эмулятор</td>
+                        <td>QEMU</td>
+                        <td>Пакет qemu-system-x86</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     ROADMAP
+     ============================================================ -->
+<section id="roadmap" class="section">
+    <div class="section-inner">
+        <div class="section-head">
+            <div class="section-eyebrow">План развития</div>
+            <h2 class="section-title">Направления работы</h2>
+            <p class="section-desc">
+                Перечень задач, запланированных к реализации в следующих
+                выпусках. Порядок и состав могут изменяться.
+            </p>
+        </div>
+
+        <div class="roadmap">
+            <div class="roadmap-row roadmap-current">
+                <div class="roadmap-ver">
+                    <span class="roadmap-ver-num">0.5.0</span>
+                    <span class="roadmap-ver-status">Текущий выпуск</span>
+                </div>
+                <div class="roadmap-body">
+                    <h3>Игры, графика, звук, автозагрузка</h3>
+                    <p>
+                        Пять игр, четыре скринсейвера, звук через PC speaker,
+                        сценарий AUTOEXEC.NE, полноэкранный редактор,
+                        графический файловый менеджер, система тем и
+                        конфигурация на диске.
+                    </p>
+                </div>
+            </div>
+
+            <div class="roadmap-row roadmap-next">
+                <div class="roadmap-ver">
+                    <span class="roadmap-ver-num">0.6.0</span>
+                    <span class="roadmap-ver-status">В работе</span>
+                </div>
+                <div class="roadmap-body">
+                    <h3>Прерывания и графический режим</h3>
+                    <p>
+                        Обработчики IRQ0 (таймер) и IRQ1 (клавиатура),
+                        видеорежим 320×200 с 256 цветами, поддержка мыши
+                        через опрос портов, экран критической ошибки,
+                        индикатор загрузки.
+                    </p>
+                </div>
+            </div>
+
+            <div class="roadmap-row roadmap-future">
+                <div class="roadmap-ver">
+                    <span class="roadmap-ver-num">0.7.0</span>
+                    <span class="roadmap-ver-status">Запланирован</span>
+                </div>
+                <div class="roadmap-body">
+                    <h3>Продуктивность и инструменты</h3>
+                    <p>
+                        Продвинутый текстовый редактор, конвейеры и
+                        перенаправление вывода, интерпретатор BASIC,
+                        переменные окружения, подкаталоги в FAT12,
+                        поддержка длинных имён.
+                    </p>
+                </div>
+            </div>
+
+            <div class="roadmap-row roadmap-future">
+                <div class="roadmap-ver">
+                    <span class="roadmap-ver-num">1.0.0</span>
+                    <span class="roadmap-ver-status">Долгосрочная цель</span>
+                </div>
+                <div class="roadmap-body">
+                    <h3>Полноценная система</h3>
+                    <p>
+                        Оконный графический интерфейс с панелью задач,
+                        собственный формат исполняемых файлов, встроенный
+                        ассемблер, поддержка VESA 640×480, установка на
+                        физический диск.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section id="faq" class="section section-alt">
+    <div class="section-inner">
+        <div class="section-head">
+            <div class="section-eyebrow">Вопросы и ответы</div>
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <p class="section-desc">
+                Ответы на типичные вопросы о продукте.
+            </p>
+        </div>
+
+        <div class="faq">
+            <details class="faq-item">
+                <summary>Это клон Linux или DOS?</summary>
+                <p>
+                    Нет. NeutrinoOS — самостоятельная разработка.
+                    Собственное ядро, собственные драйверы, собственная
+                    оболочка. Сходство с DOS ограничивается общим стилем
+                    командной строки, что является осознанным решением.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Почему не используются прерывания?</summary>
+                <p>
+                    На ранних этапах разработки обработка прерываний
+                    приводила к тройной ошибке процессора. Было принято
+                    решение построить ввод-вывод на опросе портов, что
+                    упростило отладку. Возврат к прерываниям запланирован
+                    в версии 0.6.0.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Можно ли запустить на реальном компьютере?</summary>
+                <p>
+                    Да, при наличии машины с BIOS. Система загружается с
+                    CD или USB-накопителя. UEFI не поддерживается.
+                    Рекомендуется предварительно проверить работу в QEMU.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Что происходит с файлами при выключении?</summary>
+                <p>
+                    Файлы, записанные на диск FAT12, сохраняются. Содержимое
+                    виртуального диска в оперативной памяти теряется. Для
+                    сохранения файла из памяти на диск используется команда
+                    SAVE.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Есть ли поддержка русского языка?</summary>
+                <p>
+                    Интерфейс и команды оболочки используют латиницу.
+                    Поддержка кириллицы в текстовом режиме VGA требует
+                    загрузки альтернативного шрифта и пока не реализована.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Как сообщить об ошибке?</summary>
+                <p>
+                    Через раздел Issues в репозитории проекта. Приложите
+                    описание проблемы, шаги воспроизведения и, если
+                    возможно, снимок экрана.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Планируется ли поддержка сети?</summary>
+                <p>
+                    В текущем плане развития поддержка сети не
+                    предусмотрена. Приоритет отдан прерываниям,
+                    графическому режиму и инструментам разработки.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Под какой лицензией распространяется продукт?</summary>
+                <p>
+                    Исходный код доступен по лицензии MIT. Вы можете
+                    использовать, изменять и распространять его при
+                    условии сохранения уведомления об авторских правах.
+                </p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CTA STRIP
+     ============================================================ -->
+<section class="cta">
+    <div class="cta-inner">
+        <h2>Готовы попробовать?</h2>
+        <p>
+            Скачайте образ, запустите в QEMU и посмотрите, как выглядит
+            операционная система, написанная с нуля.
+        </p>
+        <a href="#download" class="btn btn-primary">Скачать NeutrinoOS 0.5.0</a>
+    </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-cols">
+            <div class="footer-col">
+                <h4>Продукт</h4>
+                <ul>
+                    <li><a href="#overview">Обзор</a></li>
+                    <li><a href="#features">Компоненты</a></li>
+                    <li><a href="#download">Загрузка</a></li>
+                    <li><a href="#roadmap">План развития</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ресурсы</h4>
+                <ul>
+                    <li><a href="#screenshots">Галерея</a></li>
+                    <li><a href="#faq">Вопросы</a></li>
+                    <li><a href="https://github.com/ВАШ_НИК/neutrino-os" target="_blank">Исходный код</a></li>
+                    <li><a href="https://github.com/ВАШ_НИК/neutrino-os/issues" target="_blank">Сообщить об ошибке</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>О компании</h4>
+                <ul>
+                    <li><a href="#">Mikelsoft Corporation</a></li>
+                    <li><a href="#">Лицензия MIT</a></li>
+                    <li><a href="#">Правовая информация</a></li>
+                    <li><a href="#">Конфиденциальность</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Связь</h4>
+                <ul>
+                    <li><a href="https://github.com/ВАШ_НИК" target="_blank">GitHub</a></li>
+                    <li><a href="#">Электронная почта</a></li>
+                    <li><a href="#">Обсуждения</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-brand">
+                <span class="brand-mark brand-mark-sm">M</span>
+                <span>Mikelsoft Corporation INC.</span>
+            </div>
+            <div class="footer-legal">
+                <span>© 2026 Mikelsoft Corporation INC. Все права защищены.</span>
+                <span class="footer-note">
+                    NeutrinoOS не является продуктом Microsoft Corporation.
+                    Упомянутые товарные знаки принадлежат их владельцам.
+                </span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
